@@ -3,6 +3,10 @@ const routes = require('./routes')
 const mongoose = require('mongoose')
 const app = express()
 
+//Habilitar datos de entrada por parametros
+app.use(express.json())
+app.use(express.urlencoded({ extended: true}))
+
 
 //conectando mongoose
 mongoose.Promise = global.Promise;
