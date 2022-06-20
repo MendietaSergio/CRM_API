@@ -4,7 +4,9 @@ const router = express.Router();
 //Controlladores
 const {newClient,
         Clients,
-        idClients
+        idClients,
+        updateClient,
+        deleteClient
 } = require('../controllers/clientsController')
 
 module.exports = function() {
@@ -14,6 +16,8 @@ module.exports = function() {
     router.post('/clientes', newClient)
     router.get('/clientes/:id', idClients)
 
+    router.put('/clientes/:idClient', updateClient)
+    router.delete('/clientes/:idClient', deleteClient)
 
     return router;
 }
