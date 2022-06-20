@@ -8,7 +8,7 @@ const {newClient,
         updateClient,
         deleteClient
 } = require('../controllers/clientsController')
-const {newProduct
+const {newProduct, subirArchivo
 } = require('../controllers/productsController')
 
 module.exports = function() {
@@ -22,7 +22,7 @@ module.exports = function() {
     router.delete('/clientes/:idClient', deleteClient)
 
     //PRODUCTOS
-    router.post('/productos', newProduct)
+    router.post('/productos', subirArchivo, newProduct)
 
     return router;
 }
