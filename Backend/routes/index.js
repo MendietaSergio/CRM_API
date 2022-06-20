@@ -8,6 +8,8 @@ const {newClient,
         updateClient,
         deleteClient
 } = require('../controllers/clientsController')
+const {newProduct
+} = require('../controllers/productsController')
 
 module.exports = function() {
     
@@ -18,6 +20,9 @@ module.exports = function() {
 
     router.put('/clientes/:idClient', updateClient)
     router.delete('/clientes/:idClient', deleteClient)
+
+    //PRODUCTOS
+    router.post('/productos', newProduct)
 
     return router;
 }
