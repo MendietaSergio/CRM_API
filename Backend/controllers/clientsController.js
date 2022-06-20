@@ -38,3 +38,28 @@ exports.idClients = async (req,res,next) =>{
     res.json(idClient)
     
 }
+exports.updateClient = async (req,res,next) =>{
+    try {
+        const client = await Clients.findByIdAndUpdate({_id: req.params.idClient},
+            req.body,{
+                new:true
+            })
+        res.json("El cliente se actualizó")
+    } catch (error) {
+        console.log(error);
+        next()
+    }
+}
+exports.deleteClient = async (req,res,next) =>{
+    try {
+        await Clients.findByIdAndDelete({_id: req.params.idClient})
+        res.json({
+            message: "El cliente ha sido eliminado"
+        })
+    } catch (error) {
+        console.log(error);
+        next()
+    }
+}
+
+
