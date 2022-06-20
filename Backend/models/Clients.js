@@ -11,7 +11,7 @@ const clientsSchema = new Schema({
         type: String,
         trim: true
     },
-    bussines: {
+    business: {
         type: String,
         trim: true
     },
