@@ -20,7 +20,8 @@ const {
 const {
   newOrders,
   getOrders,
-  detailOrder
+  detailOrder,
+  updateOrder
 } = require("../controllers/ordersController");
 
 module.exports = function () {
@@ -43,6 +44,7 @@ module.exports = function () {
   router.post('/pedidos', newOrders)
   router.get('/pedidos', getOrders)
   router.get('/pedidos/:detailOrder', detailOrder)
+  router.put('/pedidos/:updateOrder', updateOrder)
 
   return router;
 };
