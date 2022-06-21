@@ -17,6 +17,11 @@ const {
   updateProduct,
   deleteProduct,
 } = require("../controllers/productsController");
+const {
+  newOrders,
+  getOrders,
+  detailOrder
+} = require("../controllers/ordersController");
 
 module.exports = function () {
   router.get("/clientes", Clients);
@@ -32,7 +37,12 @@ module.exports = function () {
   router.post("/productos", subirArchivo, newProduct);
   router.get("/productos/:idProduct", detailProduct);
   router.put("/productos/:idProduct", subirArchivo, updateProduct);
-  router.delete("/productos/idProduct", deleteProduct); 
+  router.delete("/productos/:idProduct", deleteProduct); 
+
+  //PEDIDOS
+  router.post('/pedidos', newOrders)
+  router.get('/pedidos', getOrders)
+  router.get('/pedidos/:detailOrder', detailOrder)
 
   return router;
 };
