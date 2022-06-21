@@ -1,42 +1,62 @@
-const Orders =require('../models/Orders')
+const Orders = require("../models/Orders");
 
+exports.newOrders = async (req, res, next) => {
+  const order = new Orders(req.body);
 
+  try {
+    await order.save();
+    res.json({
+      message: "El nuevo pedido se agregó",
+    });
+  } catch (error) {
+    console.log(error);
+    next();
+  }
+};
 
-exports.newOrders = async (req,res,next) =>{
-    const order = new Orders(req.body)
+exports.getOrders = async (req, res, next) => {
+  try {
+    const orders = await Orders.find({}).populate("client").populate({
+      path: "orders.product",
+      model: "Products",
+    });
+    res.json(orders);
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-    try {
-        await order.save()
-        res.json({
-            message: "El nuevo pedido se agregó"
-        })
-    } catch (error) {
-        console.log(error);
-        next()
-    }
-}
-
-exports.getOrders = async (req,res,next) =>{
-    try {
-        const orders = await Orders.find({}).populate('client').populate({
-            path:'orders.product',
-            model:'Products'
-        });
-        res.json(orders)
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-exports.detailOrder = async (req,res,next) =>{
-    const order = await Orders.findById(req.params.detailOrder).populate('client').populate({
-        path:'orders.product',
-        model:'Products'
+exports.detailOrder = async (req, res, next) => {
+  const order = await Orders.findById(req.params.detailOrder)
+    .populate("client")
+    .populate({
+      path: "orders.product",
+      model: "Products",
     });
 
-    if(!order){
-        res.json({messaje: "La orden de pedido no existe"})
-    }
+  if (!order) {
+    res.json({ messaje: "La orden de pedido no existe" });
+  }
 
-    res.json(order)
-}
+  res.json(order);
+};
+
+exports.updateOrder = async (req, res, next) => {
+  try {
+    let orders = await Orders.findByIdAndUpdate(
+      { _id: req.params.updateOrder },
+      req.body,
+      {
+        new: true,
+      }
+    )
+      .populate("client")
+      .populate({
+        path: "orders.product",
+        model: "Products",
+      });
+    res.json(orders);
+  } catch (error) {
+    console.log(error);
+  }
+};
