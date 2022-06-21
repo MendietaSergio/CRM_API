@@ -21,7 +21,8 @@ const {
   newOrders,
   getOrders,
   detailOrder,
-  updateOrder
+  updateOrder,
+  deleteOrder
 } = require("../controllers/ordersController");
 
 module.exports = function () {
@@ -45,6 +46,7 @@ module.exports = function () {
   router.get('/pedidos', getOrders)
   router.get('/pedidos/:detailOrder', detailOrder)
   router.put('/pedidos/:updateOrder', updateOrder)
+  router.delete('/pedidos/:deleteOrder', deleteOrder)
 
   return router;
 };

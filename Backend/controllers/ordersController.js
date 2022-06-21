@@ -60,3 +60,13 @@ exports.updateOrder = async (req, res, next) => {
     console.log(error);
   }
 };
+
+exports.deleteOrder = async (req,res,next) =>{
+    try {
+        await Orders.findOneAndDelete({_id: req.params.deleteOrder})
+        res.json({message: "El pedido se ha eliminado"})
+    } catch (error) {
+        console.log(error);
+        next()
+    }
+}
