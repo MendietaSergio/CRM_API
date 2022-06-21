@@ -27,3 +27,16 @@ exports.getOrders = async (req,res,next) =>{
         console.log(error);
     }
 }
+
+exports.detailOrder = async (req,res,next) =>{
+    const order = await Orders.findById(req.params.detailOrder).populate('client').populate({
+        path:'orders.product',
+        model:'Products'
+    });
+
+    if(!order){
+        res.json({messaje: "La orden de pedido no existe"})
+    }
+
+    res.json(order)
+}
