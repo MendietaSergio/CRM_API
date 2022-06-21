@@ -15,3 +15,15 @@ exports.newOrders = async (req,res,next) =>{
         next()
     }
 }
+
+exports.getOrders = async (req,res,next) =>{
+    try {
+        const orders = await Orders.find({}).populate('client').populate({
+            path:'orders.product',
+            model:'Products'
+        });
+        res.json(orders)
+    } catch (error) {
+        console.log(error);
+    }
+}
