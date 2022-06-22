@@ -6,9 +6,9 @@ export const Navigations = () => {
         <aside className='sidebar col-3'>
             <h2>Administración</h2>
             <nav className='navigation'>
-                <Link to={"Clientes"} className="clients">Clientes</Link>
+                <Link to={"/Clientes"} className="clients">Clientes</Link>
                 <Link to={"/Productos"} className="products">Productos</Link>
-                <Link to={"/Pedidos"} className="pedidos">Pedidos</Link>
+                <Link to={"/Pedidos"} className="orders">Pedidos</Link>
             </nav>
         </aside>
     )
