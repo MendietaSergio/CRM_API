@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import clientsAxios from "../../config/config";
 import { Client } from "./Client";
 import { Link } from "react-router-dom";
+import { Spinner } from "../Spinner/Spinner";
 
 export const Clients = () => {
   const [clients, setClients] = useState([]);
@@ -16,6 +17,9 @@ export const Clients = () => {
     };
     getApi();
   }, [clients]);
+
+  if(!clients.length) return <Spinner />
+
 
   return (
     <>
