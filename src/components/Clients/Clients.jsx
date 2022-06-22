@@ -9,14 +9,13 @@ export const Clients = () => {
   useEffect(() => {
     const getApi = async () => {
       const clientConsult = await clientsAxios.get("/clientes");
-      console.log(clientConsult);
       setClients(clientConsult.data);
-      setTimeout(() => {
-        setLoading(false);
-      }, 3000);
+    //   setTimeout(() => {
+    //     setLoading(false);
+    //   }, 3000);
     };
     getApi();
-  }, []);
+  }, [clients]);
 
   return (
     <>
@@ -25,13 +24,13 @@ export const Clients = () => {
         <i className="fas fa-plus-circle"></i>
         Nuevo Cliente
       </Link>
-      {loading ? null : (
+      {/* {loading ? null : ( */}
         <ul className="list-clients">
           {clients.map((client) => (
             <Client key={client._id} client={client} />
           ))}
         </ul>
-      )}
+      {/* )} */}
     </>
   );
 };
