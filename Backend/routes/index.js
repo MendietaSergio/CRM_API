@@ -26,6 +26,7 @@ const {
   deleteOrder
 } = require("../controllers/ordersController");
 
+const {registerUser, authUser} = require('../controllers/usersController')
 module.exports = function () {
   router.get("/clientes", Clients);
   //agrega nuevos clientes
@@ -51,6 +52,8 @@ module.exports = function () {
   router.put('/pedidos/:updateOrder', updateOrder)
   router.delete('/pedidos/:deleteOrder', deleteOrder)
 
-
+  //USUARIOS
+  router.post('/register', registerUser)
+  router.post('/login', authUser)
   return router;
 };
