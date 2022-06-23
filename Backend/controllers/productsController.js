@@ -109,3 +109,15 @@ exports.deleteProduct = async ( req,res,next) =>{
         next()
     }
 }
+
+exports.searchProducts = async (req,res,next) =>{
+  console.log("query ", req.params);
+  try {
+    const {query} = req.params;
+    const product = await Products.find({name: new RegExp(query, 'i')})
+    res.json(product)
+  } catch (error) {
+    res.send(error)
+    next()
+  }
+}
