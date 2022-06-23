@@ -16,6 +16,7 @@ const {
   detailProduct,
   updateProduct,
   deleteProduct,
+  searchProducts
 } = require("../controllers/productsController");
 const {
   newOrders,
@@ -40,13 +41,16 @@ module.exports = function () {
   router.get("/productos/:idProduct", detailProduct);
   router.put("/productos/:idProduct", subirArchivo, updateProduct);
   router.delete("/productos/:idProduct", deleteProduct); 
+  //BUSQUEDA
+  router.get('/productos/busqueda/:query',searchProducts)
 
   //PEDIDOS
-  router.post('/pedidos', newOrders)
+  router.post('/pedidos/nuevo/:id', newOrders)
   router.get('/pedidos', getOrders)
   router.get('/pedidos/:detailOrder', detailOrder)
   router.put('/pedidos/:updateOrder', updateOrder)
   router.delete('/pedidos/:deleteOrder', deleteOrder)
+
 
   return router;
 };
