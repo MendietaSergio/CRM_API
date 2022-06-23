@@ -17,6 +17,24 @@ exports.registerUser = async (req,res,next) =>{
     }
 }
 
-exports.authUser = (req,res,next) =>{
-    
+exports.authUser = async (req,res,next) =>{
+    const {email, password} = req.body;
+    const user = await Users.findOne({email})
+
+    if(!user){
+        await res.status(401).json({message: "El usuario no existe"})//no autorizado
+    } else {
+        if(!bcrypt.compareSync(password, user.password)){
+            await res.status(401).json({message: "Password incorrecto"})
+            next();
+        }else{
+            const token = jwt.sign({
+                email: user.email,
+                name: user.name,
+                id: user._id
+            }, 'REACT_NODE', {expiresIn: '1h'})
+            res.json({token})
+        }
+    }
+
 }
