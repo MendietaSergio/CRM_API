@@ -53,7 +53,7 @@ module.exports = function () {
   router.delete('/pedidos/:deleteOrder', deleteOrder)
 
   //USUARIOS
-  router.post('/register', registerUser)
-  router.post('/login', authUser)
+  router.post('/registrarse', registerUser)
+  router.post('/iniciar-sesion', authUser)
   return router;
 };
