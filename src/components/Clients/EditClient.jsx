@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import clientsAxios from "../../config/config";
 import { useNavigate } from "react-router-dom";
 import { CRMContext } from "../../Context/CRMContext";
+import { Spinner } from "../Spinner/Spinner";
 
 export const EditClient = () => {
   const navigate = useNavigate();
@@ -21,9 +22,12 @@ export const EditClient = () => {
   });
   useEffect(() => {
     const getAPI = async () => {
-      const data = await clientsAxios.get(`/clientes/${_id}`);
+      const data = await clientsAxios.get(`/clientes/${_id}`,{
+        headers: {
+          Authorization: `Bearer ${auth.token}`
+        }
+      });
       setClient(data.data);
-      console.log("data => ", data);
     };
     getAPI();
   }, []);
@@ -46,7 +50,6 @@ export const EditClient = () => {
   const updateClient = (e) => {
     e.preventDefault();
     clientsAxios.put(`/clientes/${_id}`, client).then((res) => {
-      console.log(res);
       if (res.data.code === 11000) {
         Swal.fire({
           icon: "error",
@@ -65,6 +68,7 @@ export const EditClient = () => {
       }
     });
   };
+  const {name, surname, business, email, phone} = client;
   return (
     <>
       <h2>Editar cliente</h2>
