@@ -1,27 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import clientsAxios from "../../config/config";
 import { useNavigate } from "react-router-dom";
+import { CRMContext } from "../../Context/CRMContext";
 
 export const Login = () => {
   const navigate = useNavigate();
 
   const [credentials, setCredentials] = useState();
 
+  const [auth, setAuth] = useContext(CRMContext);
+
   const login = async (e) => {
     e.preventDefault();
     try {
-      const resp = await clientsAxios.post("/iniciar-sesion", credentials);
-      const { token } = resp;
-      //almaceno token en localstorage
-      localStorage.setItem("token", token);
-      Swal.fire({
-        title: "Login correcto",
-        text: "Has iniciado sesion",
-        icon: "success",
-      });
-      navigate("/clientes");
+      const resp = await clientsAxios
+        .post("/iniciar-sesion", credentials)
+        .then((resp) => {
+          const { token } = resp.data;
+          //almaceno token en localstorage
+          localStorage.setItem("token", token);
+          //guardar datos en auth(context)
+          setAuth({
+            token,
+            auth: true,
+          });
+          Swal.fire({
+            title: "Login correcto",
+            text: "Has iniciado sesion",
+            icon: "success",
+          });
+          navigate("/clientes");
+        });
     } catch (error) {
-      console.log(error);
       Swal.fire({
         icon: "error",
         title: "Hubo un error",
