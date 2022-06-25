@@ -17,9 +17,7 @@ export const Product = ({ product }) => {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log("eliminado... ", _id);
         clientsAxios.delete(`/productos/${_id}`).then((res) => {
-          console.log(res);
           Swal.fire("Eliminado!", res.data.message, "success");
         });
       }
@@ -31,7 +29,7 @@ export const Product = ({ product }) => {
         <div className="info-products">
           <p className="name">{name}</p>
           <p className="price">${price}</p>
-          {img ? <img src={`http://localhost:5000/${img}`} alt={name} /> : null}
+          {img ? <img src={`${REACT_APP_BACKEND_URL}/${img}`} alt={name} /> : null}
         </div>
         <div className="actions">
           <Link to={`/productos/editar/${_id}`} className="btn btn-azul">
