@@ -1,25 +1,43 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import clientsAxios from "../../config/config";
 import { Client } from "./Client";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Spinner } from "../Spinner/Spinner";
+import { CRMContext } from "../../Context/CRMContext";
 
-export const Clients = () => {
+export const Clients = (props) => {
+  const navigate = useNavigate();
   const [clients, setClients] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [auth, setAuth] = useContext(CRMContext);
+  useEffect(() =>{
+    if (!auth.auth) return navigate("/clientes");
+  },[])
   useEffect(() => {
-    const getApi = async () => {
-      const clientConsult = await clientsAxios.get("/clientes");
-      setClients(clientConsult.data);
-    //   setTimeout(() => {
-    //     setLoading(false);
-    //   }, 3000);
-    };
-    getApi();
+    if (auth.token !== '') {
+      try {
+        const getApi = async () => {
+          await clientsAxios.get("/clientes", {
+            headers: {
+              Authorization : `Bearer ${auth.token}`,
+            },
+          })
+          .then((resp) =>{
+            setClients(resp.data);
+          })
+        };
+        getApi();
+      } catch (error) {
+        if (error.response.status(500)) {
+          navigate("/clientes");
+        }
+      }
+    } else {
+      navigate("/iniciar-sesion");
+    }
   }, [clients]);
 
-  if(!clients.length) return <Spinner />
-
+  
+  if (!clients.length) return <Spinner />;
 
   return (
     <>
@@ -28,13 +46,11 @@ export const Clients = () => {
         <i className="fas fa-plus-circle"></i>
         Nuevo Cliente
       </Link>
-      {/* {loading ? null : ( */}
-        <ul className="list-clients">
-          {clients.map((client) => (
-            <Client key={client._id} client={client} />
-          ))}
-        </ul>
-      {/* )} */}
+      <ul className="list-clients">
+        {clients.map((client) => (
+          <Client key={client._id} client={client} />
+        ))}
+      </ul>
     </>
   );
 };
