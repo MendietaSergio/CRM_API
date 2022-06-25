@@ -1,11 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import clientsAxios from "../../config/config";
 import { useNavigate } from "react-router-dom";
+import { CRMContext } from "../../Context/CRMContext";
 
 export const EditClient = () => {
   const navigate = useNavigate();
-
+  const [auth, setAuth] = useContext(CRMContext)
+  useEffect(() => {
+    if(!auth.auth) return navigate('/iniciar-sesion')
+  }, [])
+  
   const { _id } = useParams();
   const [client, setClient] = useState({
     name: "",
