@@ -1,11 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import clientsAxios from "../../config/config";
-import { Spinner } from "../Spinner/Spinner";
 import {useNavigate} from 'react-router-dom'
+import { CRMContext } from "../../Context/CRMContext";
 export const EditProduct = () => {
-    const navigate = useNavigate()
+  const navigate = useNavigate()
+  const [auth, setAuth] = useContext(CRMContext)
   const { _id } = useParams();
+
+useEffect(() => {
+  if(!auth.auth) return navigate('/iniciar-sesion')
+}, [])
 
   const [product, setProduct] = useState({
     name: "",
@@ -16,9 +21,15 @@ export const EditProduct = () => {
 
   useEffect(() => {
     const getAPI = async () => {
-      const data = await clientsAxios.get(`/productos/${_id}`);
-      console.log("data => ", data);
-      setProduct(data.data);
+      await clientsAxios.get(`/productos/${_id}`,{
+        headers:{
+          Authorization: `Bearer ${auth.token}`
+        }
+      })
+      .then(resp =>{
+        console.log("data => ", resp.data);
+        setProduct(resp.data);
+      })
 
     };
     getAPI();
@@ -70,9 +81,6 @@ const updateProduct = async (e) =>{
 }
 
   const { name, price, img } = product;
-
-
-//   if (!name) return <Spinner />;
   return (
     <>
       <h2>Editar Producto</h2>
