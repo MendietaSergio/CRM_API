@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import clientsAxios from "../../config/config";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { CRMContext } from "../../Context/CRMContext";
 
-export const NewClient = () => {
+export const NewClient = ({history}) => {
+  const [auth, setAuth] = useContext(CRMContext)
   const navigate = useNavigate();
   const [client, setClient] = useState({
     name: "",
@@ -29,6 +31,7 @@ export const NewClient = () => {
       !phone.length;
     return validate;
   };
+
   const addClient = (e) => {
     e.preventDefault();
     clientsAxios.post("/clientes", client).then((res) => {
@@ -48,6 +51,10 @@ export const NewClient = () => {
       }
     });
   };
+  useEffect(() =>{
+    if(!auth.auth) return navigate("/iniciar-sesion");
+  },[auth])
+
   return (
     <>
       <h2>Nuevo cliente</h2>
