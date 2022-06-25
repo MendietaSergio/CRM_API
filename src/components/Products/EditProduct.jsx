@@ -4,9 +4,9 @@ import clientsAxios from "../../config/config";
 import {useNavigate} from 'react-router-dom'
 import { CRMContext } from "../../Context/CRMContext";
 export const EditProduct = () => {
+  const { _id } = useParams();
   const navigate = useNavigate()
   const [auth, setAuth] = useContext(CRMContext)
-  const { _id } = useParams();
 
 useEffect(() => {
   if(!auth.auth) return navigate('/iniciar-sesion')
@@ -27,7 +27,6 @@ useEffect(() => {
         }
       })
       .then(resp =>{
-        console.log("data => ", resp.data);
         setProduct(resp.data);
       })
 
@@ -35,7 +34,6 @@ useEffect(() => {
     getAPI();
   }, []);
   const readArchive = (e) => {
-    console.log(e.target.files);
     setArchive(e.target.files[0]);
   };
 
