@@ -1,6 +1,4 @@
-import React,{useState, useEffect} from 'react'
-import clientsAxios from '../../config/config'
-import { Products } from '../Products/Products'
+import React from 'react'
 
 export const SearchProducts = ({getProducts, readSearch}) => {
     return (
