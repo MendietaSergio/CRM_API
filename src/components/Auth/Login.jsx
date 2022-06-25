@@ -32,11 +32,19 @@ export const Login = () => {
           navigate("/clientes");
         });
     } catch (error) {
-      Swal.fire({
-        icon: "error",
-        title: "Hubo un error",
-        text: error.response.data.message,
-      });
+      if(!error.response.data){
+        Swal.fire({
+          icon: "error",
+          title: "Hubo un error",
+          text: "Contactese con Desarrollo web",
+        });
+      }else{
+        Swal.fire({
+          icon: "error",
+          title: "Hubo un error",
+          text: error.response.data.message
+        });
+      }
     }
   };
 
