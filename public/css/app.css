@@ -45,6 +45,7 @@ h2 {
     max-width: 1400px;
     margin: 0 auto;
     width: 95%;
+    
 }
 
 /** BOTONES **/
@@ -68,7 +69,12 @@ h2 {
 .btn:hover {
     cursor: pointer;
 }
+
 @media (min-width: 768px) {
+    .container{
+        display: flex;
+    justify-content: space-between;
+    }
     .btn {
         display: inline-block;
         flex: 0 0 auto;
@@ -205,7 +211,6 @@ h2 {
     -moz-box-shadow: 0px 7px 6px -5px rgba(0,0,0,0.36);
     box-shadow: 0px 7px 6px -5px rgba(0,0,0,0.36);
     border-radius: 1rem;
-    color: red;
 }
 
 /** Mostrar clients **/
@@ -213,7 +218,6 @@ h2 {
 .list-products,
 .list-orders {
     list-style: none;
-    padding: 0;
 }
 .client,
 .product,
@@ -234,11 +238,11 @@ h2 {
         display: flex;
         justify-content: space-between;
     }
-    .client .info-client,
+    /* .client .info-client,
     .product .info-product,
     .order .info-order {
         flex: 0 0 calc(70% - 1rem);
-    }
+    } */
     .client .actions,
     .product .actions,
     .order .actions {
@@ -284,7 +288,7 @@ h2 {
 }
 .client .business,
 .order .name, 
-.resumen .precio{
+.resumen .price{
     font-weight: 700;
     font-size: 2rem;
 }
@@ -336,11 +340,11 @@ form .field {
     display: flex;
     align-items: center;
     margin-bottom: 2rem;
+    flex-direction: column;
 }
 form .field label {
     font-weight: bold;
     font-family: var(--fontTexto);
-    flex: 0 0 100px;
 }
 form .field input:not([type="submit"]){
     padding: 1.5rem;
@@ -423,7 +427,7 @@ form .field input[readonly] {
     background-color: var(--grisClaro);
     padding: 1rem 4rem;
 }
-h3.resumen-titulo {
+h3.resumen-title {
     font-size: 2.4rem;
     text-align: center;
     color: var(--azul);
