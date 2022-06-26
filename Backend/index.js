@@ -32,7 +32,7 @@ app.use(cors())
 //conectando mongoose
 mongoose.Promise = global.Promise;
 mongoose
-  .connect('mongodb+srv://Dev_SM:Mongodb1908@cluster0.fa0tl.mongodb.net/clientsapi?retryWrites=true&w=majority', {
+  .connect(process.env.DB_URL, {
     useNewUrlParser: true,
   })
   .then(() => console.log("conectado"))
