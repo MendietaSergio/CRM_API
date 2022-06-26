@@ -110,7 +110,7 @@ const updateProduct = async (e) =>{
         <div className="field">
           <label>Imagen: </label>
           {img ? (
-            <img src={`http://localhost:5000/${img}`} alt={name} width="300" />
+            <img src={`${REACT_APP_BACKEND_URL}/${img}`} alt={name} width="300" />
           ) : null}
         </div>
           <input type="file" name="img" onChange={readArchive} />
