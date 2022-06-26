@@ -6,7 +6,7 @@ require('dotenv').config()
 
 const cors = require('cors')
 
-app.use(express.static('uploads'))
+app.use(express.static(path.join(__dirname, 'uploads')));
 //Habilitar datos de entrada por parametros
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
