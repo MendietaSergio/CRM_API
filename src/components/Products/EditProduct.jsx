@@ -112,7 +112,7 @@ const updateProduct = async (e) =>{
         <div className="field">
           <label>Imagen: </label>
           {img ? (
-            <img src={`${VITE_APP_BACKEND_URL}/${img}`} alt={name} width="300" />
+            <img src={`${VITE_APP_BACKEND_URL}/static/${img}`} alt={name} width="300" />
           ) : null}
         </div>
           <input type="file" name="img" onChange={readArchive} />

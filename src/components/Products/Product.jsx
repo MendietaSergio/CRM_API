@@ -28,7 +28,7 @@ export const Product = ({ product }) => {
         <div className="info-products">
           <p className="name">{name}</p>
           <p className="price">${price}</p>
-          {img ? <img src={`${VITE_APP_BACKEND_URL}/${img}`} alt={name} /> : null}
+          {img ? <img src={`${VITE_APP_BACKEND_URL}/static/${img}`} alt={name} /> : null}
         </div>
         <div className="actions">
           <Link to={`/productos/editar/${_id}`} className="btn btn-azul">
