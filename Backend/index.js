@@ -9,7 +9,9 @@ const cors = require('cors')
 //Habilitar datos de entrada por parametros
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static('uploads'))
+// app.use(express.static('uploads'))
+app.use('/static', express.static(path.join(__dirname + '/uploads')));
+
 
 const whiteList = [process.env.FRONTEND_URL]
 
