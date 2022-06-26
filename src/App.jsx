@@ -18,6 +18,7 @@ import { NewProduct } from "./components/Products/NewProduct";
 import { NewOrder } from "./components/Orders/NewOrder";
 import { Login } from "./components/Auth/Login";
 import { CRMContext, CRMProvider } from './Context/CRMContext';
+import { NotFound } from "./components/NotFound/NotFound";
 
 function App() {
   const [auth, setAuth] = useContext(CRMContext);
@@ -52,6 +53,7 @@ function App() {
                   element={<NewOrder />}
                 />
                 <Route exact path="/iniciar-sesion" element={<Login />} />
+                <Route  exact path="/*" element={ <NotFound/> }/>
               </Switch>
             </main>
           </div>
