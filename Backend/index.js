@@ -15,6 +15,7 @@ const whiteList = [process.env.FRONTEND_URL]
 
 const corsOptions ={
   origin: (origin, callback) =>{
+    console.log(origin);
     //revisar si la peticion esta en la whitelist
     // console.log(origin);
     const success = whiteList.some(dominio => dominio === origin)
@@ -26,8 +27,8 @@ const corsOptions ={
   }
 }
 
-app.use(cors(corsOptions))
-// app.use(cors())
+// app.use(cors(corsOptions))
+app.use(cors())
 //conectando mongoose
 mongoose.Promise = global.Promise;
 mongoose
