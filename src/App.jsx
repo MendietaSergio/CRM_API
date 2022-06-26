@@ -53,6 +53,7 @@ function App() {
                   element={<NewOrder />}
                 />
                 <Route exact path="/iniciar-sesion" element={<Login />} />
+                <Route exact path="/" element={<Login />} />
                 <Route  exact path="/*" element={ <NotFound/> }/>
               </Switch>
             </main>
