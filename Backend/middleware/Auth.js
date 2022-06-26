@@ -1,8 +1,9 @@
 const jwt = require('jsonwebtoken')
 
-module.exports = (req, res, next) =>{
-    const authHeader = req.get('Autorization');
 
+module.exports = (req, res, next) =>{
+    const authHeader = req.get('Authorization');
+    // console.log(authHeader);
     //para que solo se puedan ver con autorizacion
     if(!authHeader) {
         const error = new Error('No autenticado, no hay JWT');
@@ -22,4 +23,5 @@ module.exports = (req, res, next) =>{
         error.statusCode = 401;
         throw error;
     }
+    next()
 }
