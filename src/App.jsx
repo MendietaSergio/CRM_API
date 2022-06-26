@@ -19,11 +19,9 @@ import { NewOrder } from "./components/Orders/NewOrder";
 import { Login } from "./components/Auth/Login";
 import { CRMContext, CRMProvider } from './Context/CRMContext';
 import { NotFound } from "./components/NotFound/NotFound";
-const {VITE_APP_BACKEND_URL} = import.meta.env
 
 function App() {
   const [auth, setAuth] = useContext(CRMContext);
-console.log(VITE_APP_BACKEND_URL);
   return (
     <Router>
       <div className="App">

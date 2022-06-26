@@ -28,7 +28,7 @@ export const Login = () => {
             title: "Login correcto",
             text: "Has iniciado sesion",
             icon: "success",
-          });
+          })
           navigate("/clientes");
         });
     } catch (error) {
