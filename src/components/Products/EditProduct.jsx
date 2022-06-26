@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import clientsAxios from "../../config/config";
 import {useNavigate} from 'react-router-dom'
 import { CRMContext } from "../../Context/CRMContext";
+const {VITE_APP_BACKEND_URL} = import.meta.env
+
 export const EditProduct = () => {
   const { _id } = useParams();
   const navigate = useNavigate()
@@ -110,7 +112,7 @@ const updateProduct = async (e) =>{
         <div className="field">
           <label>Imagen: </label>
           {img ? (
-            <img src={`${REACT_APP_BACKEND_URL}/${img}`} alt={name} width="300" />
+            <img src={`${VITE_APP_BACKEND_URL}/${img}`} alt={name} width="300" />
           ) : null}
         </div>
           <input type="file" name="img" onChange={readArchive} />

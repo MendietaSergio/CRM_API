@@ -2,7 +2,6 @@ import React from "react";
 
 export const DetailOrders = ({ order }) => {
   const { client, orders, total } = order;
-
   return (
     <li className="order">
       <div className="info-order">

@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import clientsAxios from "../../config/config";
 import { useNavigate } from "react-router-dom";
 import { CRMContext } from "../../Context/CRMContext";
-import { Spinner } from "../Spinner/Spinner";
 
 export const EditClient = () => {
   const navigate = useNavigate();
