@@ -27,33 +27,37 @@ const {
 } = require("../controllers/ordersController");
 
 const {registerUser, authUser} = require('../controllers/usersController')
+
+const auth = require('../middleware/Auth')
+
+
 module.exports = function () {
-  router.get("/clientes", Clients);
+  router.get("/clientes", auth, Clients);
   //agrega nuevos clientes
   router.post("/clientes", newClient);
-  router.get("/clientes/:id", idClients);
+  router.get("/clientes/:id", auth,idClients);
 
   router.put("/clientes/:idClient", updateClient);
-  router.delete("/clientes/:idClient", deleteClient);
+  router.delete("/clientes/:idClient", auth,deleteClient);
 
   //PRODUCTOS
-  router.get("/productos", getProducts);
-  router.post("/productos", subirArchivo, newProduct);
-  router.get("/productos/:idProduct", detailProduct);
+  router.get("/productos", auth,getProducts);
+  router.post("/productos",auth, subirArchivo, newProduct);
+  router.get("/productos/:idProduct",auth, detailProduct);
   router.put("/productos/:idProduct", subirArchivo, updateProduct);
-  router.delete("/productos/:idProduct", deleteProduct); 
+  router.delete("/productos/:idProduct", auth,deleteProduct); 
   //BUSQUEDA
-  router.get('/productos/busqueda/:query',searchProducts)
+  router.get('/productos/busqueda/:query',auth, searchProducts)
 
   //PEDIDOS
   router.post('/pedidos/nuevo/:id', newOrders)
-  router.get('/pedidos', getOrders)
-  router.get('/pedidos/:detailOrder', detailOrder)
-  router.put('/pedidos/:updateOrder', updateOrder)
-  router.delete('/pedidos/:deleteOrder', deleteOrder)
+  router.get('/pedidos', auth, getOrders)
+  router.get('/pedidos/:detailOrder', auth,detailOrder)
+  router.put('/pedidos/:updateOrder', auth,updateOrder)
+  router.delete('/pedidos/:deleteOrder', auth,deleteOrder)
 
   //USUARIOS
-  router.post('/registrarse', registerUser)
+  router.post('/registrarse',auth, registerUser)
   router.post('/iniciar-sesion', authUser)
   return router;
 };
