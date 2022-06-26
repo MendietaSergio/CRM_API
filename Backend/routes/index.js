@@ -33,7 +33,9 @@ const auth = require('../middleware/Auth')
 
 module.exports = function () {
   router.get('/', (req,res) =>{
-    res.send("Servidor para proyecto MERN, ClienteAPI")
+    res.send(`Servidor para proyecto MERN, ClienteAPI.
+    process.env.FRONTEND_URL => 
+    ${process.env.FRONTEND_URL}`)
   })
   router.get("/clientes", auth, Clients);
   //agrega nuevos clientes
