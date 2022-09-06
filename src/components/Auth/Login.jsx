@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import clientsAxios from "../../config/config";
 import { useNavigate } from "react-router-dom";
 import { CRMContext } from "../../Context/CRMContext";
+import { Messaje } from "../Message/Messaje";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -28,21 +29,21 @@ export const Login = () => {
             title: "Login correcto",
             text: "Has iniciado sesion",
             icon: "success",
-          })
+          });
           navigate("/clientes");
         });
     } catch (error) {
-      if(!error.response.data){
+      if (!error.response.data) {
         Swal.fire({
           icon: "error",
           title: "Hubo un error",
           text: "Contactese con Desarrollo web",
         });
-      }else{
+      } else {
         Swal.fire({
           icon: "error",
           title: "Hubo un error",
-          text: error.response.data.message
+          text: error.response.data.message,
         });
       }
     }
@@ -56,6 +57,7 @@ export const Login = () => {
   };
   return (
     <>
+      <Messaje />
       <div className="login">
         <h2>Iniciar sesion</h2>
 
