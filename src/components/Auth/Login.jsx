@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import clientsAxios from "../../config/config";
 import { useNavigate } from "react-router-dom";
 import { CRMContext } from "../../Context/CRMContext";
-import { Messaje } from "../Message/Messaje";
+import { Messaje } from "../Message/Message";
 
 export const Login = () => {
   const navigate = useNavigate();
